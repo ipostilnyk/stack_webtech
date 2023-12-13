@@ -1,0 +1,38 @@
+Class SocialMedia {
+    Field login
+    Field password
+
+    Method authenticate(login, password)
+    Method publishMessage(message)
+}
+
+Class FacebookSocialMedia extends SocialMedia {
+    Override Method authenticate(login, password)
+    Override Method publishMessage(message)
+}
+
+Class LinkedInSocialMedia extends SocialMedia {
+    Override Method authenticate(login, password)
+    Override Method publishMessage(message)
+}
+
+Class SocialMediaFactory {
+    Method createSocialMedia(networkType)
+}
+
+Function main() {
+    // Create a factory object
+    Factory = new SocialMediaFactory()
+
+    // Create objects for working with social media
+    Facebook = Factory.createSocialMedia("Facebook")
+    LinkedIn = Factory.createSocialMedia("LinkedIn")
+
+    // Authenticate with social media
+    Facebook.authenticate("my_facebook_login", "my_facebook_password")
+    LinkedIn.authenticate("my_linkedin_email", "my_linkedin_password")
+
+    // Publish messages
+    Facebook.publishMessage("Hello, Facebook!")
+    LinkedIn.publishMessage("Hello, LinkedIn!")
+}
