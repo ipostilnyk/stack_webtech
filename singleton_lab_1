@@ -1,0 +1,48 @@
+# Клас, який реалізує патерн Одинак
+class FileManager:
+    # Приватне поле для збереження єдиного екземпляра класу
+    private static instance: FileManager = null
+    
+    # Приватний конструктор, щоб заборонити створення екземплярів класу ззовні
+    private constructor():
+        # Ініціалізація даних та налаштувань
+    
+    # Метод для отримання єдиного екземпляра класу
+    public static getInstance() -> FileManager:
+        # Перевірка, чи існує вже екземпляр класу
+        if instance is null:
+            # Якщо екземпляр не існує, то створюємо його
+            instance = new FileManager()
+        return instance
+    
+    # Метод для зміни сховища користувача
+    public setStorage(storageType: string) -> None:
+        # Логіка для зміни сховища
+    
+    # Метод для завантаження файлу
+    public uploadFile(fileName: string, content: string) -> None:
+        # Логіка для завантаження файлу
+    
+    # Метод для завантаження файлу
+    public downloadFile(fileName: string) -> string:
+        # Логіка для завантаження файлу
+
+# Головний код
+method main() -> None:
+    # Отримуємо єдиний екземпляр класу FileManager
+    fileManager = FileManager.getInstance()
+    
+    # Встановлюємо сховище для користувача
+    fileManager.setStorage("Amazon S3")
+    
+    # Завантажуємо файл
+    fileManager.uploadFile("example.txt", "Це вміст файлу.")
+    
+    # Завантажуємо файл
+    fileContent = fileManager.downloadFile("example.txt")
+    
+    # Виводимо вміст завантаженого файлу
+    print("Завантажений файл:", fileContent)
+
+# Виклик головного коду
+main()
