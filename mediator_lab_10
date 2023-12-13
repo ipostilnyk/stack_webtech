@@ -1,0 +1,53 @@
+class Page:
+    method setDeliveryDate(date: Date) -> void
+    method getAvailableTimeSlots(date: Date) -> List<TimeSlot>
+    method setRecipientDetails(isOtherPerson: boolean) -> void
+    method setPickupFromStore(isPickup: boolean) -> void
+    method validateRecipientDetails() -> boolean
+
+class Mediator:
+    method notify(event: string, page: Page) -> void
+
+class DeliveryMediator extends Mediator:
+    field date: Date
+    field isOtherPerson: boolean
+    field isPickup: boolean
+
+    method setDate(date: Date) -> void
+    method setIsOtherPerson(isOtherPerson: boolean) -> void
+    method setIsPickup(isPickup: boolean) -> void
+    method update(event: string, page: Page) -> void
+
+class DeliveryPage extends Page:
+    field mediator: Mediator
+    field deliveryMediator: DeliveryMediator
+
+    method setDeliveryDate(date: Date) -> void
+    method getAvailableTimeSlots() -> List<TimeSlot>
+    method setRecipientDetails(isOtherPerson: boolean) -> void
+    method setPickupFromStore(isPickup: boolean) -> void
+    method validateRecipientDetails() -> boolean
+
+# Клієнтський код
+method main() -> void:
+    deliveryPage = new DeliveryPage()
+    deliveryMediator = new DeliveryMediator()
+
+    deliveryPage.mediator = deliveryMediator
+    deliveryPage.deliveryMediator = deliveryMediator
+
+    deliveryPage.setDeliveryDate(today)
+    availableTimeSlots = deliveryPage.getAvailableTimeSlots()
+    deliveryPage.setRecipientDetails(true)
+    isDetailsValid = deliveryPage.validateRecipientDetails()
+
+    if isDetailsValid:
+        deliveryPage.setPickupFromStore(true)
+    else:
+        deliveryMediator.setDate(tomorrow)
+        deliveryMediator.setIsOtherPerson(false)
+        deliveryMediator.setIsPickup(false)
+        deliveryMediator.update("recipient_details_invalid", deliveryPage)
+
+# Виклик головного коду
+main()
