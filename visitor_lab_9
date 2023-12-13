@@ -1,0 +1,29 @@
+# Компанія
+class Company:
+    method accept(visitor: Visitor) -> void
+    method addDepartment(department: Department) -> void
+    method getDepartments() -> List<Department>
+
+# Департамент
+class Department:
+    method accept(visitor: Visitor) -> void
+    method addEmployee(employee: Employee) -> void
+    method getEmployees() -> List<Employee>
+
+# Співробітник
+class Employee:
+    method accept(visitor: Visitor) -> void
+    method getPosition() -> string
+    method getSalary() -> decimal
+
+# Відвідувач
+class Visitor:
+    method visitCompany(company: Company) -> void
+    method visitDepartment(department: Department) -> void
+    method visitEmployee(employee: Employee) -> void
+
+# Відвідувач для формування звіту про зарплату
+class PayrollReportVisitor extends Visitor:
+    method visitCompany(company: Company) -> void
+    method visitDepartment(department: Department) -> void
+    method visitEmployee(employee: Employee) -> void
